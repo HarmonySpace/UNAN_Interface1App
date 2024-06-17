@@ -41,6 +41,7 @@
   <!-- this is a page -->
   <div id="nav"></div>
   <div class="container-lg pt-5 ">
+    <h1>Editar registro</h1>
     <div class="container-lg d-flex flex-row justify-content-between align-items-center">
       <form class="row g-3" id="form">
         <div class="col-md-9">

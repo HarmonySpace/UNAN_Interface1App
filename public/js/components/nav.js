@@ -7,11 +7,11 @@ $(document).ready(function() {
     },
     {
       label: "Nuevo",
-      link: "/src/views/create.html"
+      link: "/src/views/create.php"
     },
     {
       label: "Editar",
-      link: "/src/views/edit.html"
+      link: "/src/views/edit.php"
     }
   ]
   $.get("/src/partials/nav.mustache", function(template) {

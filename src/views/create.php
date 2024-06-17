@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unan app | Crear</title>
+  <title>Unan app | Nuevo</title>
   <link rel="stylesheet" href="/public/css/main.css" />
   <link rel="icon" href="/public/favicon.ico" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -41,8 +41,9 @@
   <!-- this is a page -->
   <div id="nav"></div>
   <div class="container-lg pt-5 ">
+    <h1>Nuevo registro</h1>
     <div class="container-lg d-flex flex-row justify-content-between align-items-center">
-      <form class="row g-3" id="form">
+      <form class="row g-3 mt-3" id="form">
         <div class="col-md-9">
           <label for="facultaty" class="form-label">Facultad</label>
           <input type="text" class="form-control" id="facultaty" name="facultaty" placeholder="John Doe" required>

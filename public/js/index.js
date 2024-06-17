@@ -1,10 +1,5 @@
 $(document).ready(function() {
-  // const nav = $("#nav")
   const table = $("#table")
-  // $.get("/src/partials/nav.mustache", function(template){
-  //   const rendered = Mustache.render(template)
-  //   nav.html(rendered)
-  // })
   $.ajax({
     url: "/src/Controller.php",
     method: "GET",
@@ -19,5 +14,4 @@ $(document).ready(function() {
       console.error(status, error)
     }
   })
-
 })
