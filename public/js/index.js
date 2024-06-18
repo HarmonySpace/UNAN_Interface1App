@@ -1,12 +1,12 @@
 $(document).ready(function() {
+  const rootDir = "../.."
   const table = $("#table")
   $.ajax({
     url: "/get",
     type: "GET",
     dataType: 'json',
     success: function(data) {
-      console.log(data)
-      $.get("/src/partials/data-table.mustache", function(template) {
+      $.get(rootDir + "/src/partials/data-table.mustache", function(template) {
         const rendered = Mustache.render(template, {data: data})
         table.html(rendered)
       })

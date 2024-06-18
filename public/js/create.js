@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  const nav = $("#nav")
   const form = $("#form")
   const select1 = $("#select1")
   const select2 = $("#select2")
@@ -81,8 +80,9 @@ $(document).ready(function() {
     event.preventDefault()
     if (form.valid()) {
       $.ajax({
-        url: "/src/Controller.php",
-        method: "POST",
+        url: "/store",
+        type: "POST",
+        dataType: 'json',
         data: {
           codfac: $("#facultaty").val(),
           tipo_beca: $("#beca").val(),

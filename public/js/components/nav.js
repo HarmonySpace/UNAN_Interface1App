@@ -7,15 +7,11 @@ $(document).ready(function() {
     },
     {
       label: "Nuevo",
-      link: "/src/views/create.php"
-    },
-    {
-      label: "Editar",
-      link: "/src/views/edit.php"
-    }
-  ]
+      link: "/create"
+    }]
   $.get("/src/partials/nav.mustache", function(template) {
-    const rendered = Mustache.render(template, {links: links})
+    console.log(template)
+    const rendered = Mustache.render(template, { links: links })
     nav.html(rendered)
   })
 })
