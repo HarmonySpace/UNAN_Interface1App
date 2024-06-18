@@ -36,17 +36,23 @@
     integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- my scripts -->
-  <script src="/public/js/create.js"></script>
   <script src="/public/js/components/nav.js"></script>
+  <script src="/public/js/components/form.js"></script>
+  <script src="/public/js/edit.js"></script>
   <!-- this is a page -->
   <div id="nav"></div>
   <div class="container-lg pt-5 ">
     <h1>Editar registro</h1>
+    <p>ID=
+      <span id="reg_id" class="p-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+        <?php echo $id; ?>
+      </span>
+    </p>
     <div class="container-lg d-flex flex-row justify-content-between align-items-center">
       <form class="row g-3" id="form">
         <div class="col-md-9">
           <label for="facultaty" class="form-label">Facultad</label>
-          <input type="text" class="form-control" id="facultaty" name="facultaty" placeholder="John Doe" required>
+          <input type="text" class="form-control" id="facultaty" name="facultaty" placeholder="000a000a000" required>
         </div>
         <div class="col-md-3">
           <div id="select1"></div>
@@ -63,7 +69,7 @@
         </div>
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Crear</button>
-          <a href="/index.html" class="btn btn-danger">Cancelar</a>
+          <a href="/" class="btn btn-danger">Cancelar</a>
         </div>
       </form>
     </div>
