@@ -1,54 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/routes.php';
+// Fetch method and URI from somewhere
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+$uri = $_SERVER['REQUEST_URI'];
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unan app</title>
-  <link rel="stylesheet" href="/public/css/main.css" />
-  <link rel="icon" href="/public/favicon.ico" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+// Strip query string (?foo=bar) and decode URI
+if (false !== $pos = strpos($uri, '?')) {
+    $uri = substr($uri, 0, $pos);
+}
+$uri = rawurldecode($uri);
 
-<body>
-  <!-- to jquery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta/jquery.min.js"
-    integrity="sha512-qFOQ9YFAeGj1gDOuUD61g3D+tLDv3u1ECYWqT82WQoaWrOhAY+5mRMTTVsQdWutbA5FORCnkEPEgU0OF8IzGvA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- to mustache -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"
-    integrity="sha512-HYiNpwSxYuji84SQbCU5m9kHEsRqwWypXgJMBtbRSumlx1iBB6QaxgEBZHSHEGM+fKyCX/3Kb5V5jeVXm0OglQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- to bootstrap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
-    integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- my scripts -->
-  <script src="/public/js/index.js"></script>
-  <script src="/public/js/components/nav.js"></script>
-  <!-- this is a page -->
-  <div id="nav"></div>
-  <div class="container-lg pt-5 ">
-    <div class="container-lg d-flex flex-row justify-content-between align-items-center">
-      <a href="src/views/create.html" class="btn btn-primary">Nuevo</a>
-      <div class="container d-flex flex-column justify-content-center align-items-end">
-        <div class="row g-3 align-items-center">
-          <div class="col-auto">
-            <label for="inputPassword6" class="col-form-label">Año</label>
-          </div>
-          <div class="col-auto">
-            <input type="number" class="form-control">
-          </div>
-        </div>
-        <div class="col-auto">
-          <input class="form-control mt-3" type="text" placeholder="Buscar">
-        </div>
-      </div>
-    </div>
-    <div id="table"></div>
-  </div>
-</body>
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        // ... 404 Not Found
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        // ... 405 Method Not Allowed
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        // ... call $handler with $vars
+        break;
+}
 
-</html>
