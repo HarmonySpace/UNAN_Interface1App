@@ -1,8 +1,9 @@
 $(document).ready(function() {
   const table = $("#table")
   $.ajax({
-    url: "/src/Controller.php",
-    method: "GET",
+    url: "/get",
+    type: "GET",
+    dataType: 'json',
     success: function(data) {
       console.log(data)
       $.get("/src/partials/data-table.mustache", function(template) {

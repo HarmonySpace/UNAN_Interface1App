@@ -27,15 +27,21 @@ class Controller
     //route "/"
     public function index()
     {
+        $view_path = $this->dir . "/src/views/home.html";
+        if (file_exists($view_path)) {
+            require_once $view_path;
+        } else {
+            echo "File not found: $view_path";
+        }
+    }
+    //route "/get"
+    public function get()
+    {
         $data_response = $this->getFileContent();
         $json_response = json_encode($data_response);
         header('Content-Type: application/json');
         echo $json_response;
     }
-    //route "/home"
-    // public function home(){
-    //     require_once $dir . "/"
-    // }
     public function store()
     {
         date_default_timezone_set('America/Managua');
@@ -60,11 +66,4 @@ class Controller
         header('Content-Type: application/json');
         echo $json_response;
     }
-}
-
-$controller = new Controller();
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $controller->index();
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $controller->store();
 }

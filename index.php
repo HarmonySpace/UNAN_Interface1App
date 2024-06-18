@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/routes.php';
+require_once 'vendor/autoload.php';
+require_once 'src/Controller.php';
+require_once 'routes.php';
+
 // Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
@@ -23,7 +25,8 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
-        // ... call $handler with $vars
+        list($class, $method) = explode('::', $handler);
+        $controller = new $class();
+        call_user_func_array([$controller, $method], $vars);
         break;
 }
-
