@@ -3,6 +3,8 @@ require_once 'vendor/autoload.php';
 require_once 'src/Controller.php';
 require_once 'routes.php';
 
+
+
 // Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
