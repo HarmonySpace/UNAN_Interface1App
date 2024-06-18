@@ -2,8 +2,9 @@
 
 class Controller
 {
-    public $json_file = "../assets/file.json";
-
+    public $dir;
+    public $json_file;
+    //personal functions
     private function getFileContent()
     {
         if (!file_exists($this->json_file)) {
@@ -13,7 +14,17 @@ class Controller
         $data_file = json_decode($json_data, true);
         return $data_file;
     }
+    private function generateId()
+    {
+        return hexdec(uniqid());
+    }
 
+    public function __construct()
+    {
+        $this->dir = __DIR__ . '/..';
+        $this->json_file = $this->dir . "/assets/file.json";
+    }
+    //route "/"
     public function index()
     {
         $data_response = $this->getFileContent();
@@ -21,12 +32,10 @@ class Controller
         header('Content-Type: application/json');
         echo $json_response;
     }
-
-    private function generateId()
-    {
-        return hexdec(uniqid());
-    }
-
+    //route "/home"
+    // public function home(){
+    //     require_once $dir . "/"
+    // }
     public function store()
     {
         date_default_timezone_set('America/Managua');
@@ -53,7 +62,6 @@ class Controller
     }
 }
 
-// $controller = new Controller("../assets/unan_interface1.json");
 $controller = new Controller();
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $controller->index();
