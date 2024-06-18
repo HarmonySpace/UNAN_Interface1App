@@ -10,7 +10,6 @@ $(document).ready(function() {
       link: "/create"
     }]
   $.get("/src/partials/nav.mustache", function(template) {
-    console.log(template)
     const rendered = Mustache.render(template, { links: links })
     nav.html(rendered)
   })
