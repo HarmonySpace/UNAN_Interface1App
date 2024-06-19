@@ -45,7 +45,7 @@ class Controller
             echo "File not found: $view_path";
         }
     }
-    //route "/create"
+    //route "/edit"
     public function edit($id)
     {
         $view_path = $this->dir . "/src/views/edit.html";
@@ -86,6 +86,25 @@ class Controller
             die("The file is not writable.");
         }
         file_put_contents($this->json_file, $json_response);
+        header('Content-Type: application/json');
+        echo $json_response;
+    }
+    //route "/find"
+    public function find($id)
+    {
+        $data_file = $this->getFileContent();
+        $object = array_filter($data_file, function($obj) use($id){
+            return $obj['id'] == $id;
+        });
+        if (!empty($object)) {
+            $object = array_values($object)[0];
+            $json_response = json_encode($object);
+        } else {
+            $json_response = [
+                "res" => "error: OBJECT NOT FOUND"
+            ];
+            $json_response = json_encode($json_response);
+        }
         header('Content-Type: application/json');
         echo $json_response;
     }

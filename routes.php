@@ -6,6 +6,7 @@ $routes = function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/create', 'Controller::create');
     $r->addRoute('POST', '/store', 'Controller::store');
     $r->addRoute('GET', '/edit/{id}', 'Controller::edit');
+    $r->addRoute('GET', '/find/{id}', 'Controller::find');
 };
 
 $dispatcher = FastRoute\simpleDispatcher($routes);

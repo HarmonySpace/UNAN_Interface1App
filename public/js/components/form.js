@@ -36,7 +36,7 @@ $(document).ready(function() {
   const options2 = beca_type.map((item) => {
     return {
       text: item,
-      value: item
+      value: item.toLowerCase()
     }
   })
   $.get("/src/partials/select.mustache", function(template) {
