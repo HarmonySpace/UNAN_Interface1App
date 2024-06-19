@@ -83,9 +83,44 @@ class Controller
         $data_file[] = $data_new;
         $json_response = json_encode($data_file);
         if (!is_writable($this->json_file)) {
-            die("The file is not writable.");
+            $json_response = [
+                "res" => "error: THE FILE IS NOT WRITABLE"
+            ];
+            $json_response = json_encode($json_response);
         }
         file_put_contents($this->json_file, $json_response);
+        header('Content-Type: application/json');
+        echo $json_response;
+    }
+    //route "/update"
+    public function update($id)
+    {
+        $data_file = $this->getFileContent();
+        $index = array_search($id, array_column($data_file, 'id'));
+        if ($index !== false) {
+            $data_file[$index]['codfac'] = $_POST['codfac'];
+            $data_file[$index]['tipo_beca'] = $_POST['tipo_beca'];
+            $data_file[$index]['monto'] = $_POST['monto'];
+            $data_file[$index]['id_regimen'] = $_POST['id_regimen'];
+            $data_file[$index]['anyo'] = $_POST['anyo'];
+            $json_response = json_encode($data_file);
+            if (!is_writable($this->json_file)) {
+                $json_response = [
+                    "res" => "error: THE FILE IS NOT WRITABLE"
+                ];
+                $json_response = json_encode($json_response);
+            }
+            file_put_contents($this->json_file, $json_response);
+            $json_response = [
+                "res" => "success: OBJECT SAVED"
+            ];
+            $json_response = json_encode($json_response);
+        } else {
+            $json_response = [
+                "res" => "error: OBJECT NOT FOUND"
+            ];
+            $json_response = json_encode($json_response);
+        }
         header('Content-Type: application/json');
         echo $json_response;
     }
@@ -93,7 +128,7 @@ class Controller
     public function find($id)
     {
         $data_file = $this->getFileContent();
-        $object = array_filter($data_file, function($obj) use($id){
+        $object = array_filter($data_file, function ($obj) use ($id) {
             return $obj['id'] == $id;
         });
         if (!empty($object)) {
