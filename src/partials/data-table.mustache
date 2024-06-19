@@ -1,0 +1,24 @@
+<table class="table table-sm mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Facultad</th>
+      <th scope="col">Tipo_beca</th>
+      <th scope="col">Monto</th>
+      <th scope="col">Regimen Académico</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{# data }}
+    <tr>
+      <th>{{ codfac }}</th>
+      <td>{{ tipo_beca }}</td>
+      <td>{{ monto }}</td>
+      <td>{{ id_regimen }}</td>
+      <td>
+        <a href="/edit/{{ id }}" class="btn btn-primary">Editar</a>
+      </td>
+    </tr>
+    {{/ data }}
+  </tbody>
+</table>

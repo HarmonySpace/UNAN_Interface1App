@@ -1,0 +1,14 @@
+{
+    "name": "php/unan_interface1app",
+    "description": "It's an interface to use in unan",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Php\\UnanInterface1app\\": "src/"
+        }
+    },
+    "require": {
+        "nikic/fast-route": "^1.3"
+    }
+}

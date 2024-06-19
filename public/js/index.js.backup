@@ -1,0 +1,25 @@
+$(document).ready(function() {
+  const print = $("#php_call")
+  async function cargar() {
+    const data = await $.ajax({
+      url: "/src/Controller.php",
+      method: "GET",
+      dataType: 'json'
+    })
+    $("#datas").empty()
+    console.log(data)
+    const template = await cargarParcial(url, "#datas", '#data-table')
+    const rendered = Mustache.render(template, {data: data})
+    $("#datas").html(rendered)
+  }
+
+  async function cargarParcial(url, id_destino, id_parcial) {
+    let plantilla = null
+    await $.get(url, function(data) {
+      $(id_destino).append(data)
+      plantilla = $(id_parcial).html()
+      return plantilla
+    })
+    return plantilla
+  }
+})
